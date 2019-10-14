@@ -38,8 +38,8 @@ constexpr int BOTTOM = 4; // 0100
 constexpr int TOP = 8;    // 1000
 /****set in main()****/
 //the number of pixels in the grid
-constexpr int grid_width;
-constexpr int grid_height;
+int grid_width;
+int grid_height;
 
 //the size of pixels sets the inital window height and width
 //don't make the pixels too large or the screen size will be larger than
@@ -111,7 +111,7 @@ void display()
     //checks for opengl errors
     //check();
 }
-void readinput(char *filename){
+void readinput(char *filename, std::vector<Polygon> polygons){
     //std::vector<PolygonBorderPixels> PolygonBorderPixelsList;
     std :: ifstream inputFile(filename);
     std :: string line;
@@ -134,7 +134,7 @@ void readinput(char *filename){
             x = stof(inputX);
             y = stof(inputX);
             //Coordinate point(x,y);
-            coorList.push_back(point);
+            //coorList.push_back(point);
         }
         //PolygonBorderPixels PolygonBorderPixels(num,coorList);
         //PolygonBorderPixelsList.push_back(PolygonBorderPixels);
@@ -257,7 +257,7 @@ void drawLineDDA(vmml::vector<3, float> start, vmml::vector<3, float> end, bool*
         }
     }
 }
-//Algorithm from textbook & class notes 
+//Algorithm from class notes & textbook 
 void drawLineBresenham(Coordinate start, Coordinate end)
 {
     float m = (end.y - start.y) / (end.x - start.x);
@@ -330,12 +330,31 @@ void drawLineBresenham(Coordinate start, Coordinate end)
 
 
 
-
 //最后是main
 int main(int argc, char *argv[])
 {
-    std::string name;
-    std::cout << "Please enter width of window: ";
-    if (!std::getline(std::cin, name)) { /* I/O error! */ return -1; }
+    float angle;
+    int iD;
+    float translationX, translationY , sFactor;
+
+    std::cout << "Please enter width of window: " ;
+    std::cin>> win_width;
+    std::cout << "Please enter height of window: ";
+    std::cin>> win_height;
+    std::vector<Polygon> polygonList;
+    readinput(argv[1], polygonList);
+    std::cout << "Please enter Polygon ID such as 0,1,2..: ";
+    std::cin >>iD;
+    std::cout << "Please enter rotation angle: ";
+    std::cin>> angle;
+    std::cout << "Please enter translation in x diretction: ";
+    std::cin>> translationX;
+    std::cout << "Please enter translation in y diretction: " ;
+    std::cin>> translationY;
+    std::cout << "Please enter scalling factor: " ;
+    std::cin>> sFactor;
+    Buffer = new float[win_width * win_height];
+    
+
 
 }
